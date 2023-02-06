@@ -8,19 +8,19 @@ Additionally, phishing is not only detrimental to individuals. Corporations, suc
 
 Moreover, the modern computerized society has forced older people to adapt to current technology trends. This rapid exposure presents a huge challenge due to inadequate training in the usage of technology. Since they might not be familiar with the ways in which they can protect their information, they greatly stand the risk of phishing attacks, which could lead to their personal information being compromised. We aim to develop a tool that minimizes the odds of encountering phishing attacks by providing a succinct report of the threat levels of new email messages. 
 
-Datasets Description
+## Datasets Description
 Phishing Dataset for Machine Learning | Kaggle - This dataset contains 48 features extracted from 5000 phishing webpages and 5000 legitimate webpages, which were downloaded from January to May 2015 and from May to June 2017. It will be useful in building a machine learning model that identifies phishing emails.
 
-Methodology
+## Methodology
 We will create a link checker that finds links in an email. Thereafter, we will create a machine learning model, trained and tested on our dataset, that determines the chances of a linked webpage being a phishing attack. We will utilize a natural language parser that scans the content of the email message and retrieves different suspicious texts, symbols, etc. Finally, we will create a browser extension that uses our model.
 
-Pre-work
+## Pre-work
 Due to the nature of our project, we plan to leverage different libraries in python for computing statistics about the data set such as panda, matplotlib, etc. Also, we plan to familiarize ourselves with the technology stack involved in building a Google Chrome Extension in order to expose our tool to a wide group of people.
 
-Actionable Items
+## Actionable Items
 We plan on meeting twice a week to work on the project (Tuesdays and Thursdays - 6-7:30pm).
 
-Milestones & Timelines
+## Milestones & Timelines
 Data Extraction and Cleaning -  1/28
 Design of Machine Learning Model - 2/6
 Training and Testing - 2/10
@@ -28,13 +28,13 @@ Iteration of Machine Learning Model - 2/20
 Chrome Extension Tool - 3/10
 Deployment of Tool - 3/13
 
-Backup Plan
+## Backup Plan
 In case we are not able to build the Chrome Extension, we will create a simple web page where users will copy and paste the email in doubt, and the analysis of the email will then display on the same web page.
 
-Allocation of tasks
+## Allocation of tasks
 Due to the nature of our project, we plan to work on the different tasks together. Should the need to divide tasks arise, we will do so accordingly. Everyone will be tasked with keeping the group accountable and on schedule.
 
-References
+## References
 https://www.frontiersin.org/articles/10.3389/fcomp.2021.563060     
 
 Is This Phishing? Older Age Is Associated With Greater Difficulty Discriminating Between Safe and Malicious Emails - PMC (nih.gov)
