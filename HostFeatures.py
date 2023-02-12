@@ -4,12 +4,7 @@ from socket import gethostbyname
 from requests import get
 from urllib.parse import urlparse
 from datetime import datetime
-from re import compile
-from json import dump, loads
-from time import sleep
-from ipaddress import ip_address
-import urllib
-from bs4 import BeautifulSoup
+from ipaddress import ip_address 
 
 class HostFeatures:
     def __init__(self, url):
@@ -19,8 +14,7 @@ class HostFeatures:
         self.now = datetime.now()
         self.whois = self.__get__whois_dict()
         self.snapshots = self.__get_site_snapshots()
-        self.response = get(url)
-
+        
     def __get_ip(self):
         try:
             ip = self.urlparse.netloc if self.url_host_is_ip() else gethostbyname(self.urlparse.netloc)

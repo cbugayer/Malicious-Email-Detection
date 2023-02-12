@@ -9,7 +9,7 @@ from string import ascii_lowercase
 from numpy import array
 from ipaddress import ip_address
 import re
-class LexicalURLFeature:
+class LexicalURLFeatures:
     def __init__(self, url):
         self.url = url
         self.urlparse = urlparse(self.url)
