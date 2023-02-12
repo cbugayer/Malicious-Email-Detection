@@ -1,9 +1,6 @@
 from urllib.parse import urlparse
-from urllib.request import urlopen
 from pyquery import PyQuery
 from requests import get
-import sys, time
-import eventlet
 
 
 class ContentFeatures:
@@ -16,7 +13,7 @@ class ContentFeatures:
         self.scripts = self.__get_scripts()
     def __get_html(self):
         try:
-            self.response = urlopen(self.url, timeout=10)
+            self.response = get(self.url, timeout=10)
             html = self.response.text if self.response else None
         except:
             html = None
