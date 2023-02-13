@@ -1,6 +1,5 @@
 from urllib.parse import urlparse
 from pyquery import PyQuery
-from requests import get
 
 
 class ContentFeatures:
@@ -8,16 +7,18 @@ class ContentFeatures:
         self.url = url
         self.urlparse = urlparse(self.url)
         self.response = ""
-        self.html = self.__get_html()
+        # self.html = self.__get_html()
         self.pq = self.__get_pq()
         self.scripts = self.__get_scripts()
-    def __get_html(self):
-        try:
-            self.response = get(self.url, timeout=10)
-            html = self.response.text if self.response else None
-        except:
-            html = None
-        return html
+    # def __get_html(self):
+    #     try:
+    #         print("open")
+    #         self.response = urlopen(self.url, timeout=10)
+    #         print("closed")
+    #         html = self.response.read().decode()
+    #     except:
+    #         html = ""
+    #     return html
 
     def __get_pq(self):
         try:
@@ -33,8 +34,8 @@ class ContentFeatures:
     # extract content-based features
     
     #HtmlLen
-    def length_of_html(self):
-        return len(self.html) if self.html else 0
+    # def length_of_html(self):
+    #     return len(self.html) if self.html else 0
 
     #NumHtmlTags
     def number_of_html_tags(self):
@@ -89,10 +90,4 @@ class ContentFeatures:
 
     #WebForwards   
     def forwarding(self):
-        if self.response == "":
-            return 1
-        else:
-            if len(self.response.history) <= 2:
-                return 0
-            else:
-                return 1
+        return int(self.url == self.response.geturl()) if self.response else -1

@@ -97,20 +97,20 @@ class HostFeatures:
             rem = -1
         return rem
     
-    #IsLive
-    def url_is_live(self):
-        url = '{}://{}'.format(self.urlparse.scheme, self.urlparse.netloc)
-        try:
-            return int(get(url).status_code == 200)
-        except:
-            return 0
-    #ConnectionSpeed
-    def url_connection_speed(self):
-        url = '{}://{}'.format(self.urlparse.scheme, self.urlparse.netloc)
-        if self.url_is_live():
-            return get(url).elapsed.total_seconds()
-        else:
-            return 100000000000
+    # #IsLive
+    # def url_is_live(self):
+    #     url = '{}://{}'.format(self.urlparse.scheme, self.urlparse.netloc)
+    #     try:
+    #         return int(get(url).status_code == 200)
+    #     except:
+    #         return 0
+    # #ConnectionSpeed
+    # def url_connection_speed(self):
+    #     url = '{}://{}'.format(self.urlparse.scheme, self.urlparse.netloc)
+    #     if self.url_is_live():
+    #         return get(url).elapsed.total_seconds()
+    #     else:
+    #         return 100000000000
         
     #AvgUpdateFrequency
     def average_update_frequency(self):
