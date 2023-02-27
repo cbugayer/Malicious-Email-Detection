@@ -3,3 +3,5 @@ numpy==1.22.2
 pandas==1.5.3
 python-whois
 wayback
+fastapi
+tensorflow
