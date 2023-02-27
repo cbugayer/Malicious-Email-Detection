@@ -12,6 +12,7 @@ import re
 class LexicalURLFeatures:
     def __init__(self, url):
         self.url = url
+        print(self.url)
         self.urlparse = urlparse(self.url)
          #listing shortening services
         self.shortening_services = r"bit\.ly|goo\.gl|shorte\.st|go2l\.ink|x\.co|ow\.ly|t\.co|tinyurl|tr\.im|is\.gd|cli\.gs|" \
