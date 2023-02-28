@@ -4,12 +4,12 @@ from HostFeatures import HostFeatures
 import pandas as pd
 
 data0 = pd.read_csv("online-valid.csv")
-phishurl = data0.sample(n = 5000, random_state = 12).copy()
+phishurl = data0.sample(n = 20000, random_state = 12).copy()
 phishurl = phishurl.reset_index(drop=True)
 data1 = pd.read_csv("Benign_list_big_final.csv")
 data1.columns = ['URLs']
 #Collecting 1,000 Legitimate URLs randomly
-legiurl = data1.sample(n = 5000, random_state = 12).copy()
+legiurl = data1.sample(n = 20000, random_state = 12).copy()
 legiurl = legiurl.reset_index(drop=True)
 
 feat_names = ['UrlLength','PathLength','Hostlength','HostIsIp','PortInUrl','NumDigits','NumQueryParams',
@@ -63,4 +63,4 @@ for i in range(0, phishurl.shape[0]):
 all_feats = legi_features + phish_features
 print("Hapa hivi",len(feat_names),len(all_feats[0]))
 dataframe = pd.DataFrame(all_feats, columns=feat_names)
-dataframe.to_csv('phishing_dataset.csv', index= False)
+dataframe.to_csv('phishing_dataset2 .csv', index= False)

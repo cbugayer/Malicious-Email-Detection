@@ -40,7 +40,7 @@ class Phishing_Detection_Model:
                 shuffle=True,
                 epochs=50
             )
-        self.model.save("../API/phishing-detection-model")
+        self.model.save("phishing-detection-model2")
         self.plot_stats(history)
     def predict(self, test_feature_vecs):
         return self.model.predict(test_feature_vecs)
@@ -86,7 +86,7 @@ def train_test_split(df, column):
     test_features, test_targets = get_features_targets(test, column)
     return train_features, train_targets, test_features, test_targets 
 
-data = pd.read_csv('phishing_dataset.csv')
+data = pd.read_csv('phishing_dataset2.csv')
 df = pd.DataFrame(data)
 train_features, train_targets, test_features, test_targets = train_test_split(df,'ClassLabel')
 
