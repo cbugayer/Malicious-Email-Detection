@@ -7,7 +7,9 @@ class EmailText extends React.Component {
     super(props);
     this.state = {
       value: 'Please insert url here for scrutiny',
-      phishingPrediction: ''
+      phishingURL: '',
+      phishingPrediction: '',
+      confidence: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,11 +25,11 @@ class EmailText extends React.Component {
     const requestOptions = {
       method: 'POST',
       headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-      body: JSON.stringify({"urls": this.state.value})
+      body: JSON.stringify({"urls": [this.state.value]})
     };
     alert('Scanning Email...');
     event.preventDefault();
-    const port = 8080
+    const port = 8000
     const serverAddress = 'http://127.0.0.1:' + port + '/phishing-prediction'
     console.log(this.state.value);
     fetch(serverAddress, requestOptions)
@@ -35,23 +37,31 @@ class EmailText extends React.Component {
         if (!response.ok){
           alert(response.statusText)
         }
-        console.log(response);
         const data = await response.json();
-        this.setState({phishingPrediction: data['predictions'][3]})
+        this.setState({phishingPrediction: data['predictions'][0]['prediction']})
+        this.setState({confidence: data['predictions'][0]['phishing_probability']})
+        this.setState({phishingURL: data['predictions'][0]['url']})
       })
   }
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Insert URL:</Form.Label>
-        <Form.Control onChange={this.handleChange} />
-      </Form.Group>
-      <Button type="submit">
-        Submit
-      </Button>
-    </Form>
+      <div>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Insert URL:</Form.Label>
+          <Form.Control onChange={this.handleChange} />
+        </Form.Group>
+        <Button type="submit">
+          Submit
+        </Button>
+        </Form>
+        <div>
+          <p>Phishing Prediction: {this.state.phishingPrediction}</p>
+          <p>Confidence: {this.state.confidence} %</p>
+          <p>URL: {this.state.phishingURL}</p>
+        </div>
+      </div>
     );
   }
 }
