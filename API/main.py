@@ -4,6 +4,7 @@ from typing import List
 import tensorflow as tf
 from tensorflow.python import keras
 from feature_extraction import feature_extraction
+from fastapi.middleware.cors import CORSMiddleware
 
 def load_phishing_detection_model():
     """
@@ -26,6 +27,16 @@ class PhishingPrediction(BaseModel):
     predictions: List[Prediction]
 
 app = FastAPI()
+origins = [
+    "*"
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 @app.post("/phishing-prediction", response_model=PhishingPrediction)
 def extract_urls(urlsDict: UrlsIn):
     urls = urlsDict.urls
