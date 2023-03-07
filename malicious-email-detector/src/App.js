@@ -1,6 +1,39 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import gmailApi from "react-gmail";
+
+class scrapeEmail extends React.Component {
+  state = {
+    messages: [],
+  };
+
+  getMessages = () => {
+    gmailApi.get.messages(true, 10).then((res) => {
+      this.setState({ messages: gmailApi.normalizeData(res) });
+    });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Malicious Email Detector</h1>
+        <h2>Scrape Email</h2>
+        <Button onClick={this.getMessages}>Scrape Email</Button>
+        <div>
+          {this.state.messages.map((message) => (
+            <div>
+              <span>
+                {message.subject}: {message.snippet}
+              </span>
+              <p>{message.date}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
 
 class EmailText extends React.Component {
   constructor(props) {
@@ -11,6 +44,8 @@ class EmailText extends React.Component {
       phishingPrediction: "",
       confidence: "",
     };
+
+    
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -55,7 +90,7 @@ class EmailText extends React.Component {
       <div className="form-container">
         <Form className="form" onSubmit={this.handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label className="form-label">Insert URL:</Form.Label>
+            <Form.Label className="form-label">Insert Email:</Form.Label>
             <Form.Control
               className="form-control"
               onChange={this.handleChange}
@@ -72,6 +107,8 @@ class EmailText extends React.Component {
           <p class="confidence">Confidence: {this.state.confidence} %</p>
           <p class="url">URL: {this.state.phishingURL}</p>
         </div>
+
+
       </div>
     );
   }
