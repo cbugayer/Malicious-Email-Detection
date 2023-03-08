@@ -140,7 +140,7 @@
         }));
 
         // decode the base64 encoded message body
-        const decodedMessage = atob(messageDetails[0]['payload']['body']['data'].replace(/-/g, '+').replace(/_/g, '/'));
+        const decodedMessage = atob(messageDetails[0]['payload']['parts'][0]['body']['data'].replace(/-/g, '+').replace(/_/g, '/'));
 
         // extract all the links in the message body
         const links = decodedMessage.match(/https?:\/\/[^\s]+/g);
