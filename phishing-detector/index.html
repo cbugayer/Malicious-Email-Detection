@@ -121,12 +121,12 @@
           messages = await gapi.client.gmail.users.messages.list({
             'userId': 'me',
             'maxResults': 1,
+            'q': "category:primary"
           });
         } catch (err) {
           document.getElementById('content').innerText = err.message;
           return;
         }
-
         //store the message id's in an array
         const messageIds = messages.result.messages.map(message => message.id);
         
@@ -138,7 +138,6 @@
           });
           return message.result;
         }));
-
         // decode the base64 encoded message body
         const decodedMessage = atob(messageDetails[0]['payload']['parts'][0]['body']['data'].replace(/-/g, '+').replace(/_/g, '/'));
 
