@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Malicious Email Detector</title>
+    <link rel="stylesheet" href="styles.css" media="all">
     <meta charset="utf-8" />
   </head>
   <body>
@@ -121,7 +122,7 @@
           messages = await gapi.client.gmail.users.messages.list({
             'userId': 'me',
             'maxResults': 1,
-            'q': "category:primary"
+            'q': "primary"
           });
         } catch (err) {
           document.getElementById('content').innerText = err.message;
@@ -138,6 +139,8 @@
           });
           return message.result;
         }));
+
+        console.log(messageDetails);
         // decode the base64 encoded message body
         const decodedMessage = atob(messageDetails[0]['payload']['parts'][0]['body']['data'].replace(/-/g, '+').replace(/_/g, '/'));
 
@@ -160,6 +163,7 @@
 
         // display an html table with the links and the predictions
         const table = document.createElement('table');
+        table.className = 'styled-table';
         table.innerHTML = `
           <tr>
             <th>Link</th>
@@ -167,9 +171,12 @@
           </tr>
         `;
         for (const [index, link] of links.entries()) {
+          const shortenedLink = link.substring(0, 80);
           const row = document.createElement('tr');
+          const header = document.createElement('th');
+          row.className = 'active-row';
           row.innerHTML = `
-            <td>${link}</td>
+            <td>${shortenedLink}</td>
             <td>${predictions[index]["prediction"]}</td>
           `;
           table.appendChild(row);
